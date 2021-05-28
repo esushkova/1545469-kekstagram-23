@@ -1,7 +1,7 @@
 # Личный проект «Кекстаграм»
 
 * Студент: [Елена](https://up.htmlacademy.ru/javascript/23/user/1545469).
-* Наставник: `Неизвестно`.
+* Наставник: [Евгений Алипкин](https://htmlacademy.ru/profile/ealipkin).
 
 ---
 
