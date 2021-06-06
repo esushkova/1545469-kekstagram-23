@@ -40,7 +40,6 @@ function checkStringLength(string, maxLength) {
 
   return false;
 }
-checkStringLength();
 
 const createUserComment = () => {
   const randomIdComment = getRandomIntInclusive(1, 200);
@@ -73,5 +72,3 @@ const createUserPost = () => {
 };
 
 const usersPosts = new Array(USERS_POSTS_COUNT).fill(null).map(() => createUserPost());
-
-usersPosts();
