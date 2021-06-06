@@ -1,36 +1,22 @@
-// Функция, возвращающая случайное целое число из переданного диапазона включительно
 function getRandomIntInclusive(min, max) {
-
-  if (min < 0 || max < 0) {
+  const isBothNumbers = typeof min === 'number' && typeof max === 'number';
+  if (!isBothNumbers) {
+    return 'Введенные значения должны быть числами';
+  }
+  if ((min < 0 || max < 0) || min >= max) {
     return 'Некорректный диапазон';
   }
-
-  if (min >= max) {
-    return 'Некорректный диапазон';
-  } else {
-    min = Math.ceil(min);
-    max = Math.floor(max);
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-  };
+  const newMin = Math.ceil(min);
+  const newMax = Math.floor(max);
+  return Math.floor(Math.random() * (newMax - newMin + 1)) + newMin;
 }
-
 getRandomIntInclusive();
 
-// Функция для проверки максимальной длины строки
-function checkStringLength (string, maxLength) {
-  if(string <= maxLength) {
+function checkStringLength(string, maxLength) {
+  if (string.length <= maxLength) {
     return true;
   }
 
   return false;
 }
-
 checkStringLength();
-
-
-// То же самое с тернарным оператором
-//function checkStringLength (string, maxLength) {
-//return (string <= maxLength) ? true : false;
-//};
-
-//checkStringLength();
