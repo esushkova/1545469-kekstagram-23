@@ -18,12 +18,8 @@ const DESCRIPTIONS = [
 ];
 
 const USERS_POSTS_COUNTS = 25;
-const MIN_COMMENTS_ID = 1;
-const MAX_COMMENTS_ID = 200;
 const MIN_AVATAR = 1;
 const MAX_AVATAR = 6;
-const MIN_POST_ID = 1;
-const MAX_POST_ID = 25;
 const MIN_INDEX_FOTO = 1;
 const MAX_INDEX_FOTO = 25;
 const MIN_LIKE = 15;
@@ -44,24 +40,19 @@ function getRandomIntInclusive(min, max) {
 }
 getRandomIntInclusive(3, 56);
 
-function checkStringLength(string, maxLength) {
-  if (string.length <= maxLength) {
-    return true;
-  }
-
-  return false;
+function checkStringLength (string, maxLength) {
+  return string.length <= maxLength;
 }
 
 checkStringLength('Hi', 15);
 
 
-const createUserComment = () => {
-  const randomIdComment = getRandomIntInclusive(MIN_COMMENTS_ID, MAX_COMMENTS_ID); //проблема с повторением id. исправить с помощью map
+const createUserComment = (id) => {
   const randomAvatar = getRandomIntInclusive(MIN_AVATAR, MAX_AVATAR);
   const randomMessage = getRandomIntInclusive(0, MESSAGES.length - 1);
   const randomName = getRandomIntInclusive(0, NAMES.length - 1);
   return {
-    id: randomIdComment,
+    id,
     avatar: `img/avatar-${randomAvatar}.svg`,
     message: MESSAGES[randomMessage],
     name: NAMES[randomName],
@@ -70,19 +61,21 @@ const createUserComment = () => {
 
 createUserComment();
 
-const arrayComments = new Array(USERS_COMMENTS_COUNTS).fill(null).map(() => createUserComment());
+const arrayComments = new Array(USERS_COMMENTS_COUNTS).fill(null).map((item, index) => {
+  const id = index + 1;
+  return createUserComment(id);
+});
 
 console.log(arrayComments);
 
 
-const createUserPost = () => {
-  const randomId = getRandomIntInclusive(MIN_POST_ID, MAX_POST_ID); //проблема с повторением id. исправить с помощью map
+const createUserPost = (id) => {
   const randomIndexFoto = getRandomIntInclusive(MIN_INDEX_FOTO, MAX_INDEX_FOTO);
   const randomDescription = getRandomIntInclusive(0, DESCRIPTIONS.length - 1);
   const randomLike = getRandomIntInclusive(MIN_LIKE, MAX_LIKE);
 
   return {
-    id: randomId,
+    id,
     url: `photos/${randomIndexFoto}.jpg`,
     description: DESCRIPTIONS[randomDescription],
     likes: randomLike,
@@ -92,7 +85,9 @@ const createUserPost = () => {
 
 createUserPost();
 
-
-const usersPosts = new Array(USERS_POSTS_COUNTS).fill(null).map(() => createUserPost());
+const usersPosts = new Array(USERS_POSTS_COUNTS).fill(null).map((item, index) => {
+  const id = index + 1;
+  return createUserPost(id);
+});
 
 console.log(usersPosts);
