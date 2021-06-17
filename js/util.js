@@ -17,3 +17,5 @@ function checkStringLength (string, maxLength) {
 }
 
 checkStringLength('Hi', 15);
+
+export {getRandomIntInclusive}

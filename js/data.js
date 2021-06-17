@@ -1,5 +1,5 @@
 import {MIN_AVATAR, MAX_AVATAR, MESSAGES, NAMES, USERS_COMMENTS_COUNTS, MIN_INDEX_FOTO, MAX_INDEX_FOTO, DESCRIPTIONS, MIN_LIKE, MAX_LIKE, USERS_POSTS_COUNTS} from './variables.js';
-import './util.js';
+import {getRandomIntInclusive} from './util.js';
 
 
 const createUserComment = (id) => {
