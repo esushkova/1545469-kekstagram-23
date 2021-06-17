@@ -1,0 +1,21 @@
+function getRandomIntInclusive(min, max) {
+  const isBothNumbers = typeof min === 'number' && typeof max === 'number';
+  if (!isBothNumbers) {
+    return 'Введенные значения должны быть числами';
+  }
+  if ((min < 0 || max < 0) || min >= max) {
+    return 'Некорректный диапазон';
+  }
+  const newMin = Math.ceil(min);
+  const newMax = Math.floor(max);
+  return Math.floor(Math.random() * (newMax - newMin + 1)) + newMin;
+}
+getRandomIntInclusive(3, 56);
+
+function checkStringLength (string, maxLength) {
+  return string.length <= maxLength;
+}
+
+checkStringLength('Hi', 15);
+
+export {getRandomIntInclusive};
