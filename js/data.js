@@ -29,6 +29,7 @@ const createUserPost = (id) => {
   };
 };
 
-const createPosts = new Array(USERS_POSTS_COUNTS).fill(null).map((item, id) => createUserPost(id + 1));
+
+const createPosts = () => new Array(USERS_POSTS_COUNTS).fill(null).map((item, id) => createUserPost(id + 1));
 
 export {createPosts};
