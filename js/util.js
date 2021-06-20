@@ -10,12 +10,9 @@ function getRandomIntInclusive(min, max) {
   const newMax = Math.floor(max);
   return Math.floor(Math.random() * (newMax - newMin + 1)) + newMin;
 }
-getRandomIntInclusive(3, 56);
 
-function checkStringLength (string, maxLength) {
-  return string.length <= maxLength;
-}
-
-checkStringLength('Hi', 15);
+//function checkStringLength (string, maxLength) {
+//  return string.length <= maxLength;
+//}
 
 export {getRandomIntInclusive};
