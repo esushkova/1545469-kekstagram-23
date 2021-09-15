@@ -1,3 +1,5 @@
+/*
+
 function getRandomIntInclusive(min, max) {
   const isBothNumbers = typeof min === 'number' && typeof max === 'number';
   if (!isBothNumbers) {
@@ -16,3 +18,4 @@ function getRandomIntInclusive(min, max) {
 //}
 
 export {getRandomIntInclusive};
+*/

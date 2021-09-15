@@ -1,3 +1,4 @@
+/*
 const MESSAGES = ['Всё отлично!',
   'В целом всё неплохо. Но не всё.',
   'Когда вы делаете фотографию, хорошо бы убирать палец из кадра. В конце концов это просто непрофессионально.',
@@ -27,3 +28,4 @@ const MAX_LIKE = 200;
 const USERS_COMMENTS_COUNTS = 5;
 
 export {MIN_AVATAR, MAX_AVATAR, MESSAGES, NAMES, USERS_COMMENTS_COUNTS, MIN_INDEX_FOTO, MAX_INDEX_FOTO, DESCRIPTIONS, MIN_LIKE, MAX_LIKE, USERS_POSTS_COUNTS};
+*/

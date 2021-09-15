@@ -1,3 +1,4 @@
+/*
 import {MIN_AVATAR, MAX_AVATAR, MESSAGES, NAMES, MIN_INDEX_FOTO, MAX_INDEX_FOTO, DESCRIPTIONS, MIN_LIKE, MAX_LIKE, USERS_POSTS_COUNTS} from './variables.js';
 import {getRandomIntInclusive} from './util.js';
 
@@ -33,3 +34,4 @@ const createUserPost = (id) => {
 const createPosts = () => new Array(USERS_POSTS_COUNTS).fill(null).map((item, id) => createUserPost(id + 1));
 
 export {createPosts};
+*/

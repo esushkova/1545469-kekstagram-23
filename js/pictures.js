@@ -1,3 +1,5 @@
+/*
+
 const smallImage = function (image) {
   const picturesBlock = document.querySelector('.pictures');
   const picturesTemplateFragment = document.querySelector('#picture').content;
@@ -17,3 +19,4 @@ const smallImage = function (image) {
 };
 
 export { smallImage };
+*/
