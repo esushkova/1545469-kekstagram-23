@@ -1,5 +1,4 @@
-/*
-
+//функция возвращает рандомное целое число из заданного диапазона включительно
 function getRandomIntInclusive(min, max) {
   const isBothNumbers = typeof min === 'number' && typeof max === 'number';
   if (!isBothNumbers) {
@@ -13,9 +12,8 @@ function getRandomIntInclusive(min, max) {
   return Math.floor(Math.random() * (newMax - newMin + 1)) + newMin;
 }
 
-//function checkStringLength (string, maxLength) {
-//  return string.length <= maxLength;
-//}
 
-export {getRandomIntInclusive};
-*/
+//функция для проверки максимальной длины строки
+function checkStringLength (string, maxLength) {
+  return string.length <= maxLength;
+}
