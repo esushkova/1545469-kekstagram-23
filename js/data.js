@@ -1,5 +1,56 @@
+import {getRandomIntInclusive} from './util.js';
+import {MESSAGES, NAMES, DESCRIPTIONS} from './variables.js';
 
 
+//функция создания комментария
+const createCommentObject = (index) => {
+  const randomMessagesIndex = _.random(0, MESSAGES.length - 1);
+  const randomNameIndex = _.random(0, NAMES.length - 1);
+
+  return {
+    id: _.random(1, 100),
+    avatar: 'img/avatar-' + getRandomIntInclusive(1, 6) + '.svg',
+    message: MESSAGES[randomMessagesIndex],
+    name: NAMES[randomNameIndex],
+  };
+};
+
+//записываю массив комментариев
+let createCommentsArray = () => {
+  let commentsArray = [];
+for(let i = 1; i < getRandomIntInclusive(2, 10); i++) {
+    commentsArray.push(createCommentObject())
+}
+    return commentsArray
+}
+
+//функция создания объекта фотографии юзера
+const createPhotoObject = () => {
+  const randomDescriptionsIndex = getRandomIntInclusive(0, DESCRIPTIONS.length - 1);
+
+  return {
+    id: _.random(1, 25),
+    url: 'photos/' + getRandomIntInclusive(1, 25) + '.jpg',
+    description: DESCRIPTIONS[randomDescriptionsIndex],
+    likes: getRandomIntInclusive(15, 200),
+    comments: createCommentsArray(),
+  };
+};
+
+//функция создания массива фотографий
+let createPhotoArray = () => {
+  let photosArray = [];
+
+  for(let i = 1; i <= 25; i++) {
+  photosArray.push(createPhotoObject())
+  }
+
+  console.log(photosArray) //временная проверка корректности подключения модулей
+
+  return photosArray
+}
+
+export {createPhotoArray}
 
 
 
