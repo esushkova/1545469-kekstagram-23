@@ -50,6 +50,15 @@ const createCommentObject = (index) => {
   };
 };
 
+//записываю массив комментариев
+let createCommentsArray = () => {
+  let commentsArray = [];
+for(let i = 1; i < getRandomIntInclusive(1, 10); i++) {
+    commentsArray.push(createCommentObject())
+}
+    return commentsArray
+}
+
 //функция создания объекта фотографии юзера
 const createPhotoObject = () => {
   const randomDescriptionsIndex = getRandomIntInclusive(0, DESCRIPTIONS.length - 1);
@@ -59,6 +68,19 @@ const createPhotoObject = () => {
     url: 'photos/' + getRandomIntInclusive(1, 25) + '.jpg',
     description: DESCRIPTIONS[randomDescriptionsIndex],
     likes: getRandomIntInclusive(15, 200),
-    comments: new Array(getRandomIntInclusive(1, 10)).fill(null).map((item, index) => createCommentObject(index + 1)),
+    comments: createCommentsArray(),
   };
 };
+
+//функция создания массива фотографий
+let createPhotoArray = () => {
+  let photosArray = [];
+
+  for(let i = 1; i <= 25; i++) {
+  photosArray.push(createPhotoObject())
+  }
+
+  return photosArray
+}
+
+createPhotoArray()
