@@ -1,7 +1,6 @@
 import {createPhotoArray} from './data.js';
+import {createThumbnails} from './pictures.js';
 
-let showAll = () => {
-  createPhotoArray()
-}
+console.log(createPhotoArray())
 
-showAll()
+createThumbnails(createPhotoArray())

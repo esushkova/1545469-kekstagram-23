@@ -1,72 +1,19 @@
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-
-const smallImage = function (image) {
-  const picturesBlock = document.querySelector('.pictures');
-  const picturesTemplateFragment = document.querySelector('#picture').content;
-  const template = picturesTemplateFragment.querySelector('.picture');
+//функция отрисовывает превьюшки на странице
+const createThumbnails = (images) => {
+  let picturesBlock = document.querySelector('.pictures');
+  let picturesTemplateFragment = document.querySelector('#picture').content;
+  let template = picturesTemplateFragment.querySelector('.picture');
   const fragment = document.createDocumentFragment();
 
-
-  for (let i = 0; i < image.length; i++) {
-    const element = template.cloneNode(true);
-    element.querySelector('.picture__img').src = image[i].url;
-    element.querySelector('.picture__likes').textContent = image[i].likes;
-    element.querySelector('.picture__comments').textContent = image[i].comments.length;
+  for (let i = 0; i < images.length; i++) {
+    let element = template.cloneNode(true);
+    element.querySelector('.picture__img').src = images[i].url;
+    element.querySelector('.picture__likes').textContent = images[i].likes;
+    element.querySelector('.picture__comments').textContent = images[i].comments;
     fragment.appendChild(element);
-  }
+  };
 
-  picturesBlock.appendChild(fragment);
-};
+  picturesBlock.appendChild(fragment)
+}
 
-export { smallImage };
-*/
+export { createThumbnails };
