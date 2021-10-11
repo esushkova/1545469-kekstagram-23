@@ -1,6 +1,7 @@
 import { createPhotoArray } from './data.js';
 import { createThumbnails } from './pictures.js';
 import { createFullPhoto } from './full-picture.js';
+import {isEscEvent} from './util.js';
 
 let newArray = createPhotoArray();
 console.log(newArray)
@@ -22,16 +23,18 @@ thumbnailsElements.forEach(element => {
     document.querySelector('body').classList.add('modal-open');
 
     createFullPhoto(newArray, id)
+
+    //обработчик закрытия по Esc навешивается на документ
+    //только после срабатывания открытия
+    document.addEventListener('keydown', function (evt) {
+      if (isEscEvent(evt)) {
+        evt.preventDefault();
+        document.querySelector('.big-picture').classList.add('hidden');
+      }
+    });
   })
 })
 
 closeButton.addEventListener('click', function () {
   document.querySelector('.big-picture').classList.add('hidden');
 })
-
-document.addEventListener('keydown', function (evt) {
-  if (evt.key === 'Escape' || evt.key === 'Esc') {
-    evt.preventDefault();
-    document.querySelector('.big-picture').classList.add('hidden');
-  }
-});
