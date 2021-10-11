@@ -29,6 +29,9 @@ closeButton.addEventListener('click', function () {
   document.querySelector('.big-picture').classList.add('hidden');
 })
 
-document.addEventListener('keydown', function () {
-  document.querySelector('.big-picture').classList.add('hidden');
+document.addEventListener('keydown', function (evt) {
+  if (evt.key === 'Escape' || evt.key === 'Esc') {
+    evt.preventDefault();
+    document.querySelector('.big-picture').classList.add('hidden');
+  }
 });
