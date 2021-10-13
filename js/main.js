@@ -5,7 +5,8 @@ import {isEscEvent} from './util.js';
 let newArray = createPhotoArray();
 console.log(newArray)
 
-createThumbnails(newArray);
+const openFullPhoto = (array) => {
+createThumbnails(array);
 
 let closeButton = document.querySelector('.big-picture__cancel');
 
@@ -27,8 +28,9 @@ const closePhotoByEsc = (evt) => {
 }
 
 document.addEventListener('keydown', closePhotoByEsc);
+}
 
-
+openFullPhoto(newArray)
 
 /*
 document.addEventListener('keydown', function (evt) {

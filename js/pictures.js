@@ -1,4 +1,6 @@
 import { createFullPhoto } from './full-picture.js';
+import {isEscEvent} from './util.js';
+
 
 //функция отрисовывает превьюшки на странице
 const createThumbnails = (images) => {
@@ -32,9 +34,7 @@ const createThumbnails = (images) => {
       document.querySelector('.comments-loader').classList.add('hidden');
       document.querySelector('body').classList.add('modal-open');
 
-      createFullPhoto(images, id)
-
-
+      createFullPhoto(images, id);
 })
   })
 
