@@ -1,6 +1,5 @@
 import { createPhotoArray } from './data.js';
 import { createThumbnails } from './pictures.js';
-import { createFullPhoto } from './full-picture.js';
 import {isEscEvent} from './util.js';
 
 let newArray = createPhotoArray();
@@ -8,8 +7,62 @@ console.log(newArray)
 
 createThumbnails(newArray);
 
-let thumbnailsElements = document.querySelectorAll('.picture');
 let closeButton = document.querySelector('.big-picture__cancel');
+
+const closePhotoByClick = () => {
+  document.querySelector('.big-picture').classList.add('hidden');
+  closeButton.removeEventListener('click', closePhotoByClick);
+
+};
+
+closeButton.addEventListener('click', closePhotoByClick);
+
+const closePhotoByEsc = (evt) => {
+  if (isEscEvent(evt)) {
+    evt.preventDefault();
+    document.querySelector('.big-picture').classList.add('hidden');
+    document.removeEventListener('keydown', closePhotoByEsc);
+
+  }
+}
+
+document.addEventListener('keydown', closePhotoByEsc);
+
+
+
+/*
+document.addEventListener('keydown', function (evt) {
+  if (isEscEvent(evt)) {
+    evt.preventDefault();
+    document.querySelector('.big-picture').classList.add('hidden');
+  }
+});
+*/
+
+
+
+
+/*
+let closeButton = document.querySelector('.big-picture__cancel');
+let container = document.querySelector('.pictures');
+
+container.addEventListener('click', function (evt) {
+  if(evt.target.nodeName === "IMG") {
+  document.querySelector('.big-picture').classList.remove('hidden');
+    createFullPhoto(newArray, id)
+  }
+})
+
+closeButton.addEventListener('click', function () {
+  document.querySelector('.big-picture').classList.add('hidden');
+})
+*/
+
+
+
+/*
+let closeButton = document.querySelector('.big-picture__cancel');
+let thumbnailsElements = document.querySelectorAll('.picture');
 
 thumbnailsElements.forEach(element => {
 
@@ -38,3 +91,5 @@ thumbnailsElements.forEach(element => {
 closeButton.addEventListener('click', function () {
   document.querySelector('.big-picture').classList.add('hidden');
 })
+
+*/
