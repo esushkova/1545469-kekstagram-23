@@ -1,30 +1,30 @@
 import { createPhotoArray } from './data.js';
 import { createThumbnails } from './pictures.js';
-import {isEscEvent} from './util.js';
+import { isEscEvent } from './util.js';
 
 let newArray = createPhotoArray();
 console.log(newArray)
 
 const openFullPhoto = (array) => {
-createThumbnails(array);
+  createThumbnails(array);
 
-let closeButton = document.querySelector('.big-picture__cancel');
+  let closeButton = document.querySelector('.big-picture__cancel');
 
-const closePhotoByClick = () => {
-  document.querySelector('.big-picture').classList.add('hidden');
-};
-
-closeButton.addEventListener('click', closePhotoByClick);
-
-const closePhotoByEsc = (evt) => {
-  if (isEscEvent(evt)) {
-    evt.preventDefault();
+  const closePhotoByClick = () => {
     document.querySelector('.big-picture').classList.add('hidden');
+  };
+
+  closeButton.addEventListener('click', closePhotoByClick);
+
+  const closePhotoByEsc = (evt) => {
+    if (isEscEvent(evt)) {
+      evt.preventDefault();
+      document.querySelector('.big-picture').classList.add('hidden');
+    }
+
   }
 
-}
-
-document.addEventListener('keydown', closePhotoByEsc);
+  document.addEventListener('keydown', closePhotoByEsc);
 }
 
 openFullPhoto(newArray)
@@ -59,13 +59,13 @@ document.addEventListener('keydown', function (evt) {
     openUploadButton.value = openUploadButton.defaultValue;
     imgUploadForm.classList.add('hidden');
     body.classList.remove('modal-open');
-    }
+  }
 });
 
 
 //проверка поля хэштега
-let submitButton = document.querySelector('.img-upload__submit')
 
+/*
 form.addEventListener('submit', function (evt) {
 
   let string = hashtagsInput.value;
@@ -78,14 +78,34 @@ for (let i = 0; i <= hashtagArray.length - 1; i++) {
     evt.preventDefault();
 console.log('AAAAA!!!!!')
     hashtagsInput.setCustomValidity('Ошибка!');
+    hashtagsInput.reportValidity();
+
    break;
   } else {
     hashtagsInput.setCustomValidity('');
     console.log('COOL!!!!!')
   }
-  hashtagsInput.reportValidity();
-
 }
+})*/
+
+hashtagsInput.addEventListener('input', function (evt) {
+  let string = hashtagsInput.value;
+  let space = ' ';
+  let hashtagArray = string.split(space);
+
+  for (let i = 0; i <= hashtagArray.length - 1; i++) {
+    let item = hashtagArray[i];
+
+    if (!re.test(item)) {
+      evt.preventDefault();
+      hashtagsInput.setCustomValidity('Хештег должен начинаться с #, должен состоять из букв и чисел и не может содержать пробелы, спецсимволы (#, @, $ и т. п.), символы пунктуации (тире, дефис, запятая и т. п.), эмодзи и т. д.');
+      hashtagsInput.reportValidity();
+      return false;
+    } else {
+      hashtagsInput.setCustomValidity('');
+    }
+    hashtagsInput.reportValidity();
+  }
 })
 
 /*
