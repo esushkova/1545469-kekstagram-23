@@ -64,26 +64,26 @@ document.addEventListener('keydown', function (evt) {
 
 
 //проверка поля хэштега
-let submitButton = form.querySelector('.img-upload__submit')
+let submitButton = document.querySelector('.img-upload__submit')
 
-submitButton.addEventListener('submit', function (evt) {
+form.addEventListener('submit', function (evt) {
 
   let string = hashtagsInput.value;
   let space = ' ';
   let hashtagArray = string.split(space);
-  console.log(hashtagArray) //посмотреть, точно ли создается массив
 
-for (let i = 1; i <= hashtagArray.length - 1; i++) {
-  console.log(hashtagArray[i]); //посмотреть, точно ли массив перебирается
+for (let i = 0; i <= hashtagArray.length - 1; i++) {
   let item = hashtagArray[i];
-  console.log(re.test(item)); //посмотреть, корректна ли проверка
-
   if(!re.test(item)) {
     evt.preventDefault();
+console.log('AAAAA!!!!!')
     hashtagsInput.setCustomValidity('Ошибка!');
-  }
-
+   break;
+  } else {
     hashtagsInput.setCustomValidity('');
+    console.log('COOL!!!!!')
+  }
+  hashtagsInput.reportValidity();
 
 }
 })
