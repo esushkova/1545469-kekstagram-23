@@ -17,7 +17,9 @@ const DESCRIPTIONS = [
   'Инстаграм для бумеров',
 ];
 
-export {MESSAGES, NAMES, DESCRIPTIONS}
+const MAX_DESCRIPTHION_LENHTH = 140;
+
+export {MESSAGES, NAMES, DESCRIPTIONS, MAX_DESCRIPTHION_LENHTH}
 
 
 
