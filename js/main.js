@@ -41,12 +41,10 @@ const re = /^#[A-Za-zА-Яа-я0-9]{1,19}$/;
 
 //let description = document.querySelector('.text__description'); //поле комментариев
 
-
 openUploadButton.addEventListener('change', function () {
   imgUploadForm.classList.remove('hidden');
   body.classList.add('modal-open');
 })
-
 
 closeUploadButton.addEventListener('click', function () {
   openUploadButton.value = openUploadButton.defaultValue;
@@ -62,49 +60,51 @@ document.addEventListener('keydown', function (evt) {
   }
 });
 
-
-//проверка поля хэштега
-
-/*
-form.addEventListener('submit', function (evt) {
-
-  let string = hashtagsInput.value;
-  let space = ' ';
-  let hashtagArray = string.split(space);
-
-for (let i = 0; i <= hashtagArray.length - 1; i++) {
-  let item = hashtagArray[i];
-  if(!re.test(item)) {
-    evt.preventDefault();
-console.log('AAAAA!!!!!')
-    hashtagsInput.setCustomValidity('Ошибка!');
-    hashtagsInput.reportValidity();
-
-   break;
-  } else {
-    hashtagsInput.setCustomValidity('');
-    console.log('COOL!!!!!')
+//валидация поля хэштега
+function testUnique(array) {
+  for (let i = 0; i < array.length - 1; i++) {
+    for (let j = i + 1; j < array.length; j++) {
+      if (array[i] === array[j]) return false;
+    }
   }
+  return true;
 }
-})*/
 
 hashtagsInput.addEventListener('input', function (evt) {
   let string = hashtagsInput.value;
   let space = ' ';
   let hashtagArray = string.split(space);
+  let unique = testUnique(hashtagArray);
 
   for (let i = 0; i <= hashtagArray.length - 1; i++) {
-    let item = hashtagArray[i];
+    let item = hashtagArray[i].toUpperCase();
 
     if (!re.test(item)) {
       evt.preventDefault();
       hashtagsInput.setCustomValidity('Хештег должен начинаться с #, должен состоять из букв и чисел и не может содержать пробелы, спецсимволы (#, @, $ и т. п.), символы пунктуации (тире, дефис, запятая и т. п.), эмодзи и т. д.');
-      hashtagsInput.reportValidity();
       return false;
-    } else {
-      hashtagsInput.setCustomValidity('');
     }
+    if (hashtagArray.length > 5) {
+      evt.preventDefault();
+      hashtagsInput.setCustomValidity('Вы можете указать не больше пяти хештегов');
+      return false;
+    }
+    if (unique) {
+      hashtagsInput.setCustomValidity('');
+    } else {
+      evt.preventDefault();
+      hashtagsInput.setCustomValidity('Хештеги не могут повторяться');
+      return false;
+    }
+
+    hashtagsInput.setCustomValidity('');
     hashtagsInput.reportValidity();
+  }
+});
+
+document.addEventListener('keydown', function (evt) {
+  if(hashtagsInput.focus([ { preventScroll: true } ])) {
+    evt.stopPropagation()
   }
 })
 
