@@ -21,4 +21,12 @@ const isEscEvent = (evt) => {
 return evt.key === 'Escape' || evt.key === 'Esc';
 };
 
-export {getRandomIntInclusive, isEscEvent}
+function testUnique(array) {
+  for (let i = 0; i < array.length - 1; i++) {
+    for (let j = i + 1; j < array.length; j++) {
+      if (array[i] === array[j]) return false;
+    }
+  }
+  return true;
+}
+export {getRandomIntInclusive, isEscEvent, testUnique}
