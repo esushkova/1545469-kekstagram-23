@@ -62,8 +62,39 @@ document.addEventListener('keydown', function (evt) {
   }
 });
 
-//валидация поля хэштега
-
+//валидация по клику на кнопку
+/* не работает
+const checkHashtags = (evt) => {
+  let string = hashtagsInput.value;
+  let space = ' ';
+  let hashtagArray = string.split(space);
+  let unique = testUnique(hashtagArray);
+console.log(hashtagArray)
+  for (let i = 0; i <= hashtagArray.length - 1; i++) {
+    let item = hashtagArray[i].toUpperCase();
+console.log(item)
+    if (!re.test(item)) {
+      evt.preventDefault();
+      hashtagsInput.setCustomValidity('Хештег должен начинаться с #, должен состоять из букв и чисел и не может содержать пробелы, спецсимволы (#, @, $ и т. п.), символы пунктуации (тире, дефис, запятая и т. п.), эмодзи и т. д.');
+      return false;
+    }
+    if (hashtagArray.length > 5) {
+      evt.preventDefault();
+      hashtagsInput.setCustomValidity('Вы можете указать не больше пяти хештегов');
+      return false;
+    }
+    if (!unique){
+      evt.preventDefault();
+      hashtagsInput.setCustomValidity('Хештеги не могут повторяться');
+      return false;
+    }
+    else {
+      hashtagsInput.setCustomValidity('');
+    }
+    hashtagsInput.reportValidity();
+  }
+};
+*/
 
 hashtagsInput.addEventListener('input', function (evt) {
   let string = hashtagsInput.value;
@@ -97,6 +128,24 @@ hashtagsInput.addEventListener('input', function (evt) {
   }
 });
 
+const checkDescription = (evt) => {
+  let valueLength = description.value.length
+  if (valueLength > MAX_DESCRIPTHION_LENHTH) {
+    evt.preventDefault();
+    description.setCustomValidity(`Максимальная длина комментария - 140 символов. Удалите лишние ${  valueLength - MAX_DESCRIPTHION_LENHTH } симв.`);
+  } else {
+    description.setCustomValidity('');
+  }
+  description.reportValidity();
+};
+
+const onSubmitButtonClick = (evt) => {
+  checkDescription(evt);
+};
+
+submitButton.addEventListener('click', onSubmitButtonClick)
+
+
 //не работает отмена закрытия по ESC
 document.addEventListener('keydown', function (evt) {
   let focus = document.activeElement;
@@ -106,17 +155,3 @@ document.addEventListener('keydown', function (evt) {
   }
 }
 });
-
-
-//валидация комментария
-submitButton.addEventListener('click', function (evt) {
-  let valueLength = description.value.length
-  if (valueLength > MAX_DESCRIPTHION_LENHTH) {
-    evt.preventDefault();
-    description.setCustomValidity(`Максимальная длина комментария - 140 символов. Удалите лишние ${  valueLength - MAX_DESCRIPTHION_LENHTH } симв.`);
-  } else {
-    description.setCustomValidity('');
-  }
-  description.reportValidity();
-});
-
