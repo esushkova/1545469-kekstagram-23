@@ -77,20 +77,24 @@ console.log(item)
 
       evt.preventDefault();
       hashtagsInput.setCustomValidity('Хештег должен начинаться с #, должен состоять из букв и чисел и не может содержать пробелы, спецсимволы (#, @, $ и т. п.), символы пунктуации (тире, дефис, запятая и т. п.), эмодзи и т. д.');
+    break
     }
     if (hashtagArray.length > 5) {
       evt.preventDefault();
       hashtagsInput.setCustomValidity('Вы можете указать не больше пяти хештегов');
+      break
     }
     if (!unique){
       evt.preventDefault();
       hashtagsInput.setCustomValidity('Хештеги не могут повторяться');
+      break
     }
     else {
       hashtagsInput.setCustomValidity('');
     }
-    hashtagsInput.reportValidity();
   }
+  hashtagsInput.reportValidity();
+
 };
 
 /*
