@@ -55,7 +55,7 @@ closeUploadButton.addEventListener('click', function () {
 })
 
 document.addEventListener('keydown', function (evt) {
-  if (isEscEvent(evt)) {
+  if (isEscEvent(evt) && document.activeElement !== hashtagsInput && document.activeElement !== description) {
     openUploadButton.value = openUploadButton.defaultValue;
     imgUploadForm.classList.add('hidden');
     body.classList.remove('modal-open');
@@ -63,30 +63,28 @@ document.addEventListener('keydown', function (evt) {
 });
 
 //валидация по клику на кнопку
-/* не работает
 const checkHashtags = (evt) => {
   let string = hashtagsInput.value;
   let space = ' ';
   let hashtagArray = string.split(space);
   let unique = testUnique(hashtagArray);
-console.log(hashtagArray)
+
   for (let i = 0; i <= hashtagArray.length - 1; i++) {
     let item = hashtagArray[i].toUpperCase();
 console.log(item)
     if (!re.test(item)) {
+      console.log('Я работаю')
+
       evt.preventDefault();
       hashtagsInput.setCustomValidity('Хештег должен начинаться с #, должен состоять из букв и чисел и не может содержать пробелы, спецсимволы (#, @, $ и т. п.), символы пунктуации (тире, дефис, запятая и т. п.), эмодзи и т. д.');
-      return false;
     }
     if (hashtagArray.length > 5) {
       evt.preventDefault();
       hashtagsInput.setCustomValidity('Вы можете указать не больше пяти хештегов');
-      return false;
     }
     if (!unique){
       evt.preventDefault();
       hashtagsInput.setCustomValidity('Хештеги не могут повторяться');
-      return false;
     }
     else {
       hashtagsInput.setCustomValidity('');
@@ -94,14 +92,13 @@ console.log(item)
     hashtagsInput.reportValidity();
   }
 };
-*/
 
+/*
 hashtagsInput.addEventListener('input', function (evt) {
   let string = hashtagsInput.value;
   let space = ' ';
   let hashtagArray = string.split(space);
   let unique = testUnique(hashtagArray);
-
   for (let i = 0; i <= hashtagArray.length - 1; i++) {
     let item = hashtagArray[i].toUpperCase();
 
@@ -127,6 +124,7 @@ hashtagsInput.addEventListener('input', function (evt) {
     hashtagsInput.reportValidity();
   }
 });
+*/
 
 const checkDescription = (evt) => {
   let valueLength = description.value.length
@@ -135,11 +133,13 @@ const checkDescription = (evt) => {
     description.setCustomValidity(`Максимальная длина комментария - 140 символов. Удалите лишние ${  valueLength - MAX_DESCRIPTHION_LENHTH } симв.`);
   } else {
     description.setCustomValidity('');
+
   }
   description.reportValidity();
 };
 
 const onSubmitButtonClick = (evt) => {
+  checkHashtags(evt);
   checkDescription(evt);
 };
 
