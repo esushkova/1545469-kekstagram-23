@@ -53,8 +53,13 @@ arrayCommentsList.forEach(item => {
         element.children[1].textContent = item.message;
 
         fragment.appendChild(element);
+
       })
       commentList.appendChild(fragment)
+
+      let commentListsLength = document.querySelectorAll('.social__comment')
+      console.log(commentList.length)
+      countShowComments.textContent = `${commentListsLength.length} из ${fullPhotoCommentsCount.textContent} комментариев `
 
   })
 
