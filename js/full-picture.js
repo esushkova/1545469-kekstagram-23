@@ -18,7 +18,7 @@ const createFullPhoto = (array, id) => {
   let commentTemplate = commentList.querySelector('.social__comment');
   const fragment = document.createDocumentFragment();
 
-  let arrayCommentsList = array[id].comments.slice(0, 5);
+  //let arrayCommentsList = array[id].comments.slice(0, 5);
 
 
 arrayCommentsList.forEach(item => {
@@ -39,11 +39,12 @@ arrayCommentsList.forEach(item => {
 
   let button = document.querySelector('.social__comments-loader');
 
+  /*
   button.addEventListener('click', function () {
     console.log('AAAAAAAAAAAAAA')
     let newArray = array[id].comments.slice(5);
 
-//это работает, но только потому,что у меня не бывает больше 10 комментариев под одним фото
+//нет, это не работает
     newArray.forEach(item => {
 
         let element = commentTemplate.cloneNode(true)
@@ -57,13 +58,12 @@ arrayCommentsList.forEach(item => {
       })
       commentList.appendChild(fragment)
 
-      let commentListsLength = document.querySelectorAll('.social__comment')
-      console.log(commentList.length)
-      countShowComments.textContent = `${commentListsLength.length} из ${fullPhotoCommentsCount.textContent} комментариев `
+      let commentListsLength = document.querySelectorAll('.social__comment');
+      console.log(commentList.length);
+      countShowComments.textContent = `${commentListsLength.length} из ${fullPhotoCommentsCount.textContent} комментариев `;
 
   })
-
-//<div class="social__comment-count">5 из <span class="comments-count">125</span> комментариев</div>
+  */
 
 }
 
