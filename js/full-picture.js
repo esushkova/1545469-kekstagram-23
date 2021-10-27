@@ -1,4 +1,6 @@
-let currentComments = [];
+let commentList = document.querySelector('.social__comments');
+let commentTemplate = commentList.querySelector('.social__comment');
+const fragment = document.createDocumentFragment();
 
 const createFullPhoto = (array, id) => {
 
@@ -6,7 +8,7 @@ const createFullPhoto = (array, id) => {
   let fullPhotoLikes = document.querySelector('.likes-count');
   let fullPhotoCommentsCount = document.querySelector('.comments-count');
   let photoDescription = document.querySelector('.social__caption');
-  let countShowComments = document.querySelector('.social__comment-count');
+  //let countShowComments = document.querySelector('.social__comment-count');
 
   fullPhotoImg.src = array[id].url;
   fullPhotoLikes.textContent = array[id].likes;
@@ -14,14 +16,11 @@ const createFullPhoto = (array, id) => {
   photoDescription.textContent = array[id].description;
 
   //список комментариев
-  let commentList = document.querySelector('.social__comments');
-  let commentTemplate = commentList.querySelector('.social__comment');
-  const fragment = document.createDocumentFragment();
+  commentList.innerHTML = '';
 
-  //let arrayCommentsList = array[id].comments.slice(0, 5);
+  let arrayCommentsList = array[id].comments.slice(0, 5);
 
-
-arrayCommentsList.forEach(item => {
+  arrayCommentsList.forEach(item => {
 
     let element = commentTemplate.cloneNode(true)
 
@@ -32,38 +31,41 @@ arrayCommentsList.forEach(item => {
     fragment.appendChild(element);
   })
 
-    commentList.innerHTML = '';
-
-
   commentList.appendChild(fragment)
+
 
   let button = document.querySelector('.social__comments-loader');
 
-  /*
+  console.log(commentList.childNodes)
+
   button.addEventListener('click', function () {
-    console.log('AAAAAAAAAAAAAA')
-    let newArray = array[id].comments.slice(5);
+    let startToSlice = commentList.querySelectorAll('.social__comment').length;
+    console.log(startToSlice)
+    let arrayCommentsList = array[id].comments.slice(startToSlice, startToSlice + 5);
 
-//нет, это не работает
-    newArray.forEach(item => {
+    arrayCommentsList.forEach(item => {
 
-        let element = commentTemplate.cloneNode(true)
+      let element = commentTemplate.cloneNode(true)
 
-        element.children[0].src = item.avatar;
-        element.children[0].alt = item.name;
-        element.children[1].textContent = item.message;
+      element.children[0].src = item.avatar;
+      element.children[0].alt = item.name;
+      element.children[1].textContent = item.message;
 
-        fragment.appendChild(element);
+      fragment.appendChild(element);
 
-      })
-      commentList.appendChild(fragment)
+    })
 
-      let commentListsLength = document.querySelectorAll('.social__comment');
-      console.log(commentList.length);
-      countShowComments.textContent = `${commentListsLength.length} из ${fullPhotoCommentsCount.textContent} комментариев `;
+    commentList.appendChild(fragment)
 
+
+    console.log(commentList.childNodes)
+
+
+    /*
+    countShowComments.textContent = `${commentListsLength.length} из ${fullPhotoCommentsCount.textContent} комментариев `;
+*/
   })
-  */
+
 
 }
 
