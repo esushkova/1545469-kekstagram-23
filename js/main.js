@@ -130,10 +130,10 @@ const MIN_SCALE = 25;
 const STEP = 25;
 
 scaleControlValue.setAttribute('value', `${MAX_SCALE}%`);
-previewImage.style.transform = `scale(${MAX_SCALE}%, ${MAX_SCALE}%)`;
+previewImage.style.transform = `scale(${MAX_SCALE}%, ${MAX_SCALE}%)`; //что делает эта строка??
 
 scaleControlBigger.addEventListener('click', () => {
-  const value = Number(scaleControlValue.value.replace(/[^-0-9-.]/, ''));
+  const value = Number(scaleControlValue.value.replace(/[^-0-9-.]/, '')); //что делает эта строка??
   if(value < MAX_SCALE) {
     scaleControlValue.setAttribute('value', (`${value + STEP}%`));
     previewImage.style.transform = `scale(${value + STEP}%)`;
@@ -146,6 +146,96 @@ scaleControlSmaller.addEventListener('click', () => {
     scaleControlValue.setAttribute('value', (`${value - STEP}%`));
     previewImage.style.transform = `scale(${value - STEP}%)`;
   }
+});
+
+//управление фильтрами
+
+const slider = document.querySelector('.effect-level__slider');
+const levelValue = document.querySelector('.effect-level__value');
+const filters = document.querySelectorAll('.effects__radio');
+const level = document.querySelector('.effect-level');
+
+let filterName = '';
+level.classList.add('hidden');
+noUiSlider.create(slider, {
+  range: {
+    min: 0,
+    max: 1,
+  },
+  start: 0.5,
+  step: 0.1,
+  connect: 'lower',
+});
+
+slider.noUiSlider.on('update', (values, handle) => {
+  levelValue.value = values[handle];
+});
+
+const adjustFilter = (filter) => {
+  if (filter === 'effect-none') {
+    previewImage.style.filter = 'none';
+  } else if (filter === 'effect-chrome') {
+    previewImage.style.filter = `grayscale(${levelValue.value})`;
+  } else if (filter === 'effect-sepia') {
+    previewImage.style.filter = `sepia(${levelValue.value})`;
+  } else if (filter === 'effect-marvin') {
+    previewImage.style.filter = `invert(${levelValue.value}%)`;
+  } else if (filter === 'effect-phobos') {
+    previewImage.style.filter = `blur(${levelValue.value}px)`;
+  } else if (filter === 'effect-heat') {
+    previewImage.style.filter = `brightness(${levelValue.value})`;
+  }
+};
+
+const setFilter = (effect) => {
+  filterName  = effect.getAttribute('id');
+  level.classList.remove('hidden');
+  if (filterName === 'effect-none') {
+    level.classList.add('hidden');
+  } else if (filterName === 'effect-marvin') {
+    slider.noUiSlider.updateOptions({
+      range: {
+        min: 0,
+        max: 100,
+      },
+      start: 100,
+      step: 1,
+    });
+  } else if (filterName === 'effect-phobos') {
+    slider.noUiSlider.updateOptions({
+      range: {
+        min: 0,
+        max: 3,
+      },
+      start: 3,
+      step: 0.1,
+    });
+  } else if (filterName === 'effect-heat') {
+    slider.noUiSlider.updateOptions({
+      range: {
+        min: 1,
+        max: 3,
+      },
+      start: 3,
+      step: 0.1,
+    });
+  } else {
+    slider.noUiSlider.updateOptions({
+      range: {
+        min: 0,
+        max: 1,
+      },
+      start: 1,
+      step: 0.1,
+    });
+  }
+
+  adjustFilter(filterName);
+  slider.noUiSlider.on('update', () => adjustFilter(filterName));
+};
+
+filters.forEach((filtersItem) => {
+  filtersItem.addEventListener('click', () => setFilter(filtersItem));
 });
 
 
