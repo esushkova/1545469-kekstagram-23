@@ -8,19 +8,8 @@ let fullPhotoCommentsCount = document.querySelector('.comments-count-total');
 let photoDescription = document.querySelector('.social__caption');
 let count = 0;
 
-const createFullPhoto = (array, id) => {
-
-  fullPhotoImg.src = array[id].url;
-  fullPhotoLikes.textContent = array[id].likes;
-  fullPhotoCommentsCount.textContent = array[id].comments.length;
-  photoDescription.textContent = array[id].description;
-
-  commentList.innerHTML = '';
-
-let arrayCommentsList = array[id].comments.slice(0, 2);
-
-
-  arrayCommentsList.forEach(item => {
+const createCommentsFragment = (container, array, id) => {
+  container.forEach(item => {
 
     let element = commentTemplate.cloneNode(true)
 
@@ -43,47 +32,44 @@ let arrayCommentsList = array[id].comments.slice(0, 2);
     button.classList.remove('hidden')
   }
 
-    button.addEventListener('click', function () {
-    commentList.innerHTML = '';
-    count += 2;
-
-    let arrayCommentsList = array[id].comments.slice(0, count + 2);
-
-    if(count > array[id].comments.length) {
-      console.log("work")
-      count = array[id].comments.length
-    }
-
-    arrayCommentsList.forEach(item => {
-
-      let element = commentTemplate.cloneNode(true)
-
-      element.children[0].src = item.avatar;
-      element.children[0].alt = item.name;
-      element.children[1].textContent = item.message;
-
-      fragment.appendChild(element);
-
-    })
-
-    commentList.appendChild(fragment)
-
-    if(commentList.childNodes.length === array[id].comments.length) {
-      button.classList.add('hidden');
-    }
-    if(commentList.childNodes.length < array[id].comments.length) {
-      button.classList.remove('hidden')
-    }
-
-
-    console.log(commentList.childNodes.length)
-    console.log(array[id].comments.length)
-
-
-  })
-
-
 }
+
+const createFullPhoto = (array, id) => {
+
+  fullPhotoImg.src = array[id].url;
+  fullPhotoLikes.textContent = array[id].likes;
+  fullPhotoCommentsCount.textContent = array[id].comments.length;
+  photoDescription.textContent = array[id].description;
+
+  commentList.innerHTML = '';
+
+let arrayCommentsList = array[id].comments.slice(0, count + 2);
+
+createCommentsFragment(arrayCommentsList, array, id);
+
+button.addEventListener('click', function () {
+  commentList.innerHTML = '';
+  count += 2;
+
+  let arrayCommentsList = array[id].comments.slice(0, count + 2);
+
+  if(count > array[id].comments.length) {
+    console.log("work")
+    count = array[id].comments.length
+  }
+
+  createCommentsFragment(arrayCommentsList, array, id)
+
+  console.log(commentList.childNodes.length)
+  console.log(array[id].comments.length)
+
+
+})
+};
+
+
+
+
 
 
 export { createFullPhoto }
